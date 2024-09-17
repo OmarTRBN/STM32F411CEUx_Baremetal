@@ -35,8 +35,7 @@ GPIO_TypeDef* getGpioPin(char GPIO_port){
 	return target_port;
 }
 
-void pinMode(int portPin, char mode)
-{
+void pinMode(int portPin, char mode){
 	char port = portPin/16;
 	char pin = portPin%16;
 	GPIO_TypeDef *GPIO = getGpioPin(port);
@@ -57,8 +56,7 @@ void pinMode(int portPin, char mode)
 	}
 }
 
-void digitalWrite(int portPin, char state)
-{
+void digitalWrite(int portPin, char state){
 	char port = portPin/16;
 	char pin = portPin%16;
 	GPIO_TypeDef *GPIO = getGpioPin(port);
