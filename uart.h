@@ -34,6 +34,8 @@ PA4 -> CK
 static uint16_t compute_uart_baudrate(uint32_t periphalClk, uint32_t baudrate);
 static void uart_set_baudrate(USART_TypeDef* USARTx, uint32_t periphalClk, uint32_t baudrate);
 
+void uint32_to_str(uint32_t value, char* str);
+
 void uart2_write_char(int ch);
 void uart2_tx_init(void);
 void uart2_rxtx_init(void);

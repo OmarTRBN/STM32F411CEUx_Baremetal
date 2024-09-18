@@ -1,8 +1,31 @@
 #include "uart.h"
 #include "gpio.h"
 
-void uart2_write_char(int ch)
-{
+void uint32_to_str(uint32_t value, char* str){
+    char temp[11];  // Maximum 10 digits for uint32_t plus null terminator
+    int i = 0;
+    
+    // Handle special case of zero
+    if (value == 0) {
+        str[0] = '0';
+        str[1] = '\0';
+        return;
+    }
+    
+    // Convert digits to characters in reverse order
+    while (value > 0) {
+        temp[i++] = (value % 10) + '0';
+        value /= 10;
+    }
+    
+    // Reverse the string
+    int j;
+    for (j = 0; j < i; j++) {
+        str[j] = temp[i - 1 - j];
+    }
+    str[j] = '\0';  // Null-terminate the string
+}
+void uart2_write_char(int ch){
 	// Make sure transmit data register is empty
 	while(!(USART2->SR & SR_TXE)){}
 	// Write to transmit data register
