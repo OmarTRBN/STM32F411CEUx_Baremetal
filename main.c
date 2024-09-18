@@ -3,6 +3,7 @@
 #include "stm32f4xx.h"
 #include "gpio.h"
 #include "uart.h"
+#include "adc.h"
 
 #define LEDPIN PC13
 
@@ -13,16 +14,28 @@ void delay(volatile uint32_t count) {
 
 int main(void)
 {
-	uart2_tx_init();
+	uint32_t adc_value = 0; 
+	PA1_adc_init();
+	start_cont_conversion();
 	pinMode(LEDPIN, OUTPUT);
 	
 	while(1)
 	{
-		uart2_write_char('y');
-		uart2_write_char('\r');
-		uart2_write_char('\n');
 		delay(1000000);
-		togglePin(LEDPIN);
+		adc_value = adc_read();
+		if (adc_value > 2048)
+		{
+			digitalWrite(LEDPIN, HIGH);
+		}
+		else
+		{
+			digitalWrite(LEDPIN, LOW);
+		}
+		while (1)
+		{
+			// Do none
+		}
+		// togglePin(LEDPIN);
 	}
     
 }
