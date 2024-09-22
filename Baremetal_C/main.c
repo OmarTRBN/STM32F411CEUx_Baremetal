@@ -7,15 +7,10 @@
 
 int main(void)
 {
-	pinMode(LEDPIN, OUTPUT);
-	
-	initTim2();
+
+	tim2_pa5_output_compare();
 	
 	while (1)
 	{
-		while(!(TIM2->SR & TIM2_SR_UIF));
-		
-		TIM2->SR &= ~(TIM2_SR_UIF);
-	  togglePin(PC13);
 	}
 }
