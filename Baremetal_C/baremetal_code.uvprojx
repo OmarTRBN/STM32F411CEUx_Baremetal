@@ -409,11 +409,26 @@
               <FileType>1</FileType>
               <FilePath>.\systick.c</FilePath>
             </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\time.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Headers</GroupName>
           <Files>
+            <File>
+              <FileName>stm32_omar.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\stm32_omar.h</FilePath>
+            </File>
             <File>
               <FileName>gpio.h</FileName>
               <FileType>5</FileType>
@@ -433,6 +448,16 @@
               <FileName>systick.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\systick.h</FilePath>
+            </File>
+            <File>
+              <FileName>clock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\clock.h</FilePath>
+            </File>
+            <File>
+              <FileName>time.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\time.h</FilePath>
             </File>
           </Files>
         </Group>

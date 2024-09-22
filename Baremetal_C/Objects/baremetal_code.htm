@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\baremetal_code.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\baremetal_code.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Fri Sep 20 14:06:29 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Sun Sep 22 23:10:49 2024
 <BR><P>
 <H3>Maximum Stack Usage =         16 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -532,15 +532,15 @@ Global Symbols
 <P><STRONG><a name="[43]"></a>SystemInit</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, system_stm32f4xx.o(.text.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f411xe.o(.text)
 </UL>
-<P><STRONG><a name="[59]"></a>digitalWrite</STRONG> (Thumb, 106 bytes, Stack size 0 bytes, gpio.o(.text.digitalWrite))
+<P><STRONG><a name="[59]"></a>initTim2</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, time.o(.text.initTim2))
 <BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[50]"></a>main</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = main &rArr; pinMode
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;systickDelayMs
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digitalWrite
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;togglePin
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initTim2
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
@@ -552,7 +552,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5a]"></a>systickDelayMs</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, systick.o(.text.systickDelayMs))
+<P><STRONG><a name="[5a]"></a>togglePin</STRONG> (Thumb, 88 bytes, Stack size 0 bytes, gpio.o(.text.togglePin))
 <BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 

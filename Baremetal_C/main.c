@@ -1,28 +1,21 @@
 // main.c
 
 #include "stm32f4xx.h"
-#include "gpio.h"
-#include "uart.h"
-#include "adc.h"
-#include "systick.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h> 
+#include "stm32_omar.h"
 
 #define LEDPIN PC13
 
-
 int main(void)
 {
-	
 	pinMode(LEDPIN, OUTPUT);
 	
-	while(1)
+	initTim2();
+	
+	while (1)
 	{
-		digitalWrite(LEDPIN, HIGH);
-		systickDelayMs(1000);
-		digitalWrite(LEDPIN, LOW);
-		systickDelayMs(1000);
+		while(!(TIM2->SR & TIM2_SR_UIF));
+		
+		TIM2->SR &= ~(TIM2_SR_UIF);
+	  togglePin(PC13);
 	}
-    
 }
