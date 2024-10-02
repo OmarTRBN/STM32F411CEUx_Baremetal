@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>STM32F411CEU6</TargetName>
+      <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>baremetal_code</OutputName>
+          <OutputName>STM32F4_I2C_TX</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>5</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -323,7 +323,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>3</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -382,7 +382,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source</GroupName>
+          <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
@@ -390,84 +390,59 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
+              <FileName>I2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\I2C.c</FilePath>
+            </File>
+            <File>
+              <FileName>Delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>RccConfig.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\RccConfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c-lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\i2c-lcd.c</FilePath>
+            </File>
+            <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\gpio.c</FilePath>
             </File>
-            <File>
-              <FileName>uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>systick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\clock.c</FilePath>
-            </File>
-            <File>
-              <FileName>time.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\time.c</FilePath>
-            </File>
-            <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\i2c.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Headers</GroupName>
+          <GroupName>New Group</GroupName>
           <Files>
             <File>
-              <FileName>stm32_omar.h</FileName>
+              <FileName>I2C.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\stm32_omar.h</FilePath>
+              <FilePath>.\I2C.h</FilePath>
+            </File>
+            <File>
+              <FileName>Delay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Delay.h</FilePath>
+            </File>
+            <File>
+              <FileName>RccConfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\RccConfig.h</FilePath>
+            </File>
+            <File>
+              <FileName>i2c-lcd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\i2c-lcd.h</FilePath>
             </File>
             <File>
               <FileName>gpio.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\gpio.h</FilePath>
-            </File>
-            <File>
-              <FileName>uart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\uart.h</FilePath>
-            </File>
-            <File>
-              <FileName>adc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\adc.h</FilePath>
-            </File>
-            <File>
-              <FileName>systick.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\systick.h</FilePath>
-            </File>
-            <File>
-              <FileName>clock.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\clock.h</FilePath>
-            </File>
-            <File>
-              <FileName>time.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\time.h</FilePath>
-            </File>
-            <File>
-              <FileName>i2c.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\i2c.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -487,13 +462,13 @@
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="6.1.0" condition="ARMv6_7_8-M Device">
         <package name="CMSIS" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="6.1.0"/>
         <targetInfos>
-          <targetInfo name="STM32F411CEU6"/>
+          <targetInfo name="Target 1"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.6.3" condition="STM32F4 CMSIS">
         <package name="STM32F4xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.17.1"/>
         <targetInfos>
-          <targetInfo name="STM32F411CEU6"/>
+          <targetInfo name="Target 1"/>
         </targetInfos>
       </component>
     </components>
@@ -503,7 +478,7 @@
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.6.3" condition="STM32F4 CMSIS"/>
         <package name="STM32F4xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.17.1"/>
         <targetInfos>
-          <targetInfo name="STM32F411CEU6"/>
+          <targetInfo name="Target 1"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c" version="2.6.8">
@@ -511,7 +486,7 @@
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.6.3" condition="STM32F4 CMSIS"/>
         <package name="STM32F4xx_DFP" schemaVersion="1.7.2" url="https://www.keil.com/pack/" vendor="Keil" version="2.17.1"/>
         <targetInfos>
-          <targetInfo name="STM32F411CEU6"/>
+          <targetInfo name="Target 1"/>
         </targetInfos>
       </file>
     </files>

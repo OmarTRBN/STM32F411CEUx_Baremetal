@@ -7,5 +7,6 @@
 #include "systick.h"
 #include "clock.h"
 #include "time.h"
+#include "i2c.h"
 
 #endif // STM32_OMAR_H

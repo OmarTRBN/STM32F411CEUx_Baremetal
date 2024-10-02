@@ -21,25 +21,30 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-C:\Users\omart\Desktop\Projects\STM32F411CEUx_Baremetal\Baremetal_C\baremetal_code.uvprojx
-Project File Date:  09/23/2024
+C:\Users\omart\Desktop\Projects\STM32F411CEUx_Baremetal\I2C_Baremetal\STM32F4_I2C_TX.uvprojx
+Project File Date:  09/25/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'C:\Users\omart\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
-Rebuild target 'STM32F411CEU6'
-compiling time.c...
-compiling systick.c...
-compiling system_stm32f4xx.c...
-compiling adc.c...
+Rebuild target 'Target 1'
 assembling startup_stm32f411xe.s...
-compiling clock.c...
-compiling i2c.c...
+compiling RccConfig.c...
 compiling main.c...
+compiling system_stm32f4xx.c...
+compiling Delay.c...
+compiling i2c-lcd.c...
 compiling gpio.c...
-compiling uart.c...
+I2C.c(90): warning: unused variable 'temp' [-Wunused-variable]
+   90 |         uint8_t temp = I2C1->SR1 | I2C1->SR2;  // read SR1 and SR2 to clear the ADDR bit
+      |                 ^~~~
+I2C.c(97): warning: unused variable 'temp' [-Wunused-variable]
+   97 |         uint8_t temp = I2C1->SR1 | I2C1->SR2;
+      |                 ^~~~
+2 warnings generated.
+compiling I2C.c...
 linking...
-Program Size: Code=1328 RO-data=424 RW-data=0 ZI-data=1632  
-".\Objects\baremetal_code.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=1596 RO-data=424 RW-data=0 ZI-data=1632  
+".\Objects\STM32F4_I2C_TX.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -56,7 +61,7 @@ Package Vendor: Keil
    * Component: Startup Version: 2.6.3
 
 <h2>Collection of Component include folders:</h2>
-  ./RTE/_STM32F411CEU6
+  ./RTE/_Target_1
   C:/Users/omart/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include
   C:/Users/omart/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
 
@@ -65,12 +70,12 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE@6.1.0
 
    * Component: Keil::Device:Startup@2.6.3
+      Source file:   MDK/Device/Source/ARM/STM32F411xx_OPT.s
       Source file:   MDK/Device/Source/ARM/STM32F4xx_OTP.s
       Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
-      Source file:   MDK/Device/Source/ARM/STM32F411xx_OPT.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f411xe.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
