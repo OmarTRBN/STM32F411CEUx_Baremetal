@@ -10,3 +10,5 @@
 
 void initTim2();
 void tim2_pa5_output_compare();
+
+void SBL_TIM2_PA1_PWM();
