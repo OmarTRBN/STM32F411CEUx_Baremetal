@@ -15,6 +15,33 @@ void initTim2(){
 	TIM2->CR1 |= TIM2_CR1_CEN;
 }
 
+int tim2_set_frequency(uint32_t desired_frequency, uint32_t timer_clock_frequency)
+{
+	if (desired_frequency > MAX_DES_FREQ)
+	{
+		return 0;
+	}
+	else
+	{
+		uint32_t psc = 0;
+		
+    // Calculate PSC based on the desired frequency and fixed ARR
+    psc = (timer_clock_frequency / (desired_frequency * (ARR_VALUE + 1))) - 1;
+		
+		// Stop Timer
+		TIM2->CR1 &= ~TIM_CR1_CEN;
+
+    // Set the timer configuration
+    TIM2->PSC = psc;
+
+    // Reset counter and enable timer
+    TIM2->CNT = 0;
+    TIM2->CR1 |= TIM_CR1_CEN;
+
+    return 1; // Successfully set the frequency
+	}
+}
+
 void tim2_pa5_output_compare()
 {
 	RCC->AHB1ENR |= 0b1<<0; // Enable GPIOA
@@ -26,8 +53,10 @@ void tim2_pa5_output_compare()
 	GPIOA->AFR[0] &= ~(0b1111 << 20);
 	GPIOA->AFR[0] |= 0b0001 << 20;
 	
-	TIM2->PSC = 160-1;
-	TIM2->ARR = 2000-1;
+	GPIOA->OSPEEDR |= (0b11 << 10); // Set high-speed mode for PA5
+	
+	TIM2->PSC = 16-1;
+	TIM2->ARR = ARR_VALUE;
 	
 	TIM2->CCMR1 &= ~(0b111 << 4);
 	TIM2->CCMR1 |= TIM2_CCMR1_OC1M_TOGGLE;
@@ -61,4 +90,13 @@ void SBL_TIM2_PA1_PWM()
 	TIM2->CCR2 = 499;
 	TIM2->CNT = 0;
 	TIM2->CR1 |= TIM2_CR1_CEN; // Enable counter
+}
+
+void SBL_TIM2_SetDutyCycle(uint8_t dutyCycle)
+{
+    // Ensure duty cycle is between 0 and 100%
+    if(dutyCycle > 100) dutyCycle = 100;
+
+    // Calculate and set CCR2 value based on duty cycle and ARR value
+    TIM2->CCR2 = (TIM2->ARR + 1) * dutyCycle / 100;
 }
