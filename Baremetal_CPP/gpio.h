@@ -46,4 +46,3 @@ char SBL_DigitalRead(int portPin);
 void SBL_TogglePin(int portPin);
 
 #endif // GPIO_H
-

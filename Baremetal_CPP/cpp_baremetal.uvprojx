@@ -405,19 +405,29 @@
               <FilePath>.\gpio.cpp</FilePath>
             </File>
             <File>
-              <FileName>gpio.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\gpio.h</FilePath>
-            </File>
-            <File>
               <FileName>timers.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\timers.cpp</FilePath>
             </File>
             <File>
+              <FileName>systick.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\systick.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\gpio.h</FilePath>
+            </File>
+            <File>
               <FileName>timers.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\timers.h</FilePath>
+            </File>
+            <File>
+              <FileName>systick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\systick.h</FilePath>
             </File>
           </Files>
         </Group>
