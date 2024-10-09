@@ -1,5 +1,6 @@
 #include "gpio.h"
 
+// Useful functions
 GPIO_TypeDef* getGpioPin(char GPIO_port){
 	GPIO_TypeDef* target_port;
 	switch(GPIO_port)
@@ -35,7 +36,8 @@ GPIO_TypeDef* getGpioPin(char GPIO_port){
 	return target_port;
 }
 
-void pinMode(int portPin, char mode){
+// User functions
+void SBL_PinMode(int portPin, char mode, uint8_t speed, uint8_t af){
 	char port = portPin/16;
 	char pin = portPin%16;
 	GPIO_TypeDef *GPIO = getGpioPin(port);
@@ -45,6 +47,7 @@ void pinMode(int portPin, char mode){
 	if (mode==INPUT)
 	{
 		GPIO->MODER &= ~(0b11 << (pin*2)); // Resetting bit values (set as input)
+		
 		GPIO->PUPDR &= ~(0b11 << (pin*2)); // Resetting bit values
 		GPIO->PUPDR |= 0b10 << (pin*2); // Set as pulldown (10)
 	}
@@ -52,11 +55,31 @@ void pinMode(int portPin, char mode){
 	{
 		GPIO->MODER &= ~(0b11 << (pin*2)); // Resetting bit values
 		GPIO->MODER |= 0b01 << (pin*2); // Setting pin to output (01)
+		
 		GPIO->OTYPER &= ~(0b1 << pin); // Setting output push-pull (0)
 	}
+	else if (mode==ALTERNATE)
+	{
+		GPIO->MODER &= ~(0b11 << (pin * 2)); // Resetting bit values
+		GPIO->MODER |= 0b10 << (pin * 2); // Setting pin to alternate function (10)
+			
+		if (pin < 8)
+		{
+			GPIO->AFR[0] &= ~(0xF << (pin * 4));
+			GPIO->AFR[0] |= (af << (pin * 4));
+		}
+		else
+		{
+			GPIO->AFR[1] &= ~(0xF << ((pin - 8) * 4));
+			GPIO->AFR[1] |= (af << ((pin - 8) * 4));
+		}
+	}
+	
+	GPIO->OSPEEDR &= ~(0b11 << (pin * 2)); // Clear speed bits
+	GPIO->OSPEEDR |= (speed << (pin * 2)); // Set speed
 }
 
-void digitalWrite(int portPin, char state){
+void SBL_DigitalWrite(int portPin, char state){
 	char port = portPin/16;
 	char pin = portPin%16;
 	GPIO_TypeDef *GPIO = getGpioPin(port);
@@ -71,7 +94,7 @@ void digitalWrite(int portPin, char state){
 	}
 }
 
-char digitalRead(int portPin){
+char SBL_DigitalRead(int portPin){
 	char port = portPin/16;
 	char pin = portPin%16; 
 	GPIO_TypeDef * GPIO = getGpioPin(port);
@@ -79,7 +102,7 @@ char digitalRead(int portPin){
 	return (GPIO->IDR & (0b1 << pin));	
 }
 
-void togglePin(int portPin){
+void SBL_TogglePin(int portPin){
     char port = portPin / 16;  // Determine the port (0-15 is A, 16-31 is B, etc.)
     char pin = portPin % 16;   // Determine the pin within the port
     GPIO_TypeDef* GPIO = getGpioPin(port);

@@ -15,8 +15,7 @@ void initTim2(){
 	TIM2->CR1 |= TIM2_CR1_CEN;
 }
 
-int tim2_set_frequency(uint32_t desired_frequency, uint32_t timer_clock_frequency)
-{
+int tim2_set_frequency(uint32_t desired_frequency, uint32_t timer_clock_frequency){
 	if (desired_frequency > MAX_DES_FREQ)
 	{
 		return 0;
@@ -42,8 +41,7 @@ int tim2_set_frequency(uint32_t desired_frequency, uint32_t timer_clock_frequenc
 	}
 }
 
-void tim2_pa5_output_compare()
-{
+void tim2_pa5_output_compare(){
 	RCC->AHB1ENR |= 0b1<<0; // Enable GPIOA
 	RCC->APB1ENR |= RCC_APB1_TIM2_EN;
 	
@@ -59,16 +57,15 @@ void tim2_pa5_output_compare()
 	TIM2->ARR = ARR_VALUE;
 	
 	TIM2->CCMR1 &= ~(0b111 << 4);
-	TIM2->CCMR1 |= TIM2_CCMR1_OC1M_TOGGLE;
+	TIM2->CCMR1 |= TIM2_CCMR1_OC1M_TOGGLE; // Set mode to toggle
 	
-	TIM2->CCER |= TIM2_CCER_CC1E;
+	TIM2->CCER |= TIM2_CCER_CC1E; // Capture enable
 	
-	TIM2->CNT = 0;
-	TIM2->CR1 |= TIM2_CR1_CEN;
+	TIM2->CNT = 0; // Reset count value
+	TIM2->CR1 |= TIM2_CR1_CEN; // Start counter
 }
 
-void SBL_TIM2_PA1_PWM()
-{
+void SBL_TIM2_PA1_PWM(){
 	// PA1 is TIM2_CH2
 	RCC->AHB1ENR |= 0b1<<0; // Enable GPIOA
 	RCC->APB1ENR |= RCC_APB1_TIM2_EN; // Enable TIM2 peripheral clock
@@ -92,11 +89,23 @@ void SBL_TIM2_PA1_PWM()
 	TIM2->CR1 |= TIM2_CR1_CEN; // Enable counter
 }
 
-void SBL_TIM2_SetDutyCycle(uint8_t dutyCycle)
-{
+void SBL_TIM2_SetDutyCycle(uint8_t dutyCycle){
     // Ensure duty cycle is between 0 and 100%
     if(dutyCycle > 100) dutyCycle = 100;
 
     // Calculate and set CCR2 value based on duty cycle and ARR value
     TIM2->CCR2 = (TIM2->ARR + 1) * dutyCycle / 100;
+}
+void initTim2Interrupt(){
+	RCC->APB1ENR |= RCC_APB1_TIM2_EN;
+	
+	TIM2->PSC = 1600-1;
+	TIM2->ARR = 10000-1;
+	
+	TIM2->CNT = 0;
+	TIM2->CR1 |= TIM2_CR1_CEN;
+	
+	TIM2->DIER |= DIER_UIE;
+	
+	NVIC_EnableIRQ(TIM2_IRQn);
 }

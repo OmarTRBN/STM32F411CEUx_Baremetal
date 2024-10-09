@@ -17,9 +17,15 @@
 
 #define INPUT 0
 #define OUTPUT 1
+#define ALTERNATE 2
 
-#define HIGH  1
 #define LOW 0
+#define HIGH  1
+
+#define GPIO_SPEED_LOW 0
+#define GPIO_SPEED_MEDIUM 1
+#define GPIO_SPEED_HIGH 2
+#define GPIO_SPEED_VERY_HIGH 3
 
 enum portA{PA0=0,PA1,PA2,PA3,PA4,PA5,PA6,PA7,PA8,PA9,PA10,PA11,PA12,PA13,PA14,PA15}; 
 enum portB{PB0=16,PB1,PB2,PB3,PB4,PB5,PB6,PB7,PB8,PB9,PB10,PB11,PB12,PB13,PB14,PB15}; 
@@ -31,11 +37,13 @@ enum portG{PG0=96,PG1,PG2,PG3,PG4,PG5,PG6,PG7,PG8,PG9,PG10,PG11,PG12,PG13,PG14,P
 enum portH{PH0=112,PH1,PH2,PH3,PH4,PH5,PH6,PH7,PH8,PH9,PH10,PH11,PH12,PH13,PH14,PH15}; 
 enum portI{PI0=128,PI1,PI2,PI3,PI4,PI5,PI6,PI7,PI8,PI9,PI10,PI11,PI12,PI13,PI14,PI15}; 
 enum portJ{PJ0=144,PJ1,PJ2,PJ3,PJ4,PJ5,PJ6,PJ7,PJ8,PJ9,PJ10,PJ11,PJ12,PJ13,PJ14,PJ15}; 
+enum AF{AF0=0,AF1,AF2,AF3,AF4,AF5,AF6,AF7,AF8,AF9,AF10,AF11,AF12,AF13,AF14,AF15};
 
-void pinMode(int portPin, char mode);
-void digitalWrite(int portPin, char state);
-char digitalRead(int portPin);
-void togglePin(int portPin);
+// User functions
+void SBL_PinMode(int portPin, char mode, uint8_t speed=0, uint8_t af=AF0);
+void SBL_DigitalWrite(int portPin, char state);
+char SBL_DigitalRead(int portPin);
+void SBL_TogglePin(int portPin);
 
 #endif // GPIO_H
 
